@@ -12,7 +12,6 @@ on:
 permissions:
   contents: read
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,6 +27,9 @@ jobs:
     - name: Clear pip cache
       run: |
         pip cache purge
+    - name: Verify requirements.txt presence
+      run: |
+        if [ ! -f requirements.txt ]; then echo "requirements.txt not found"; exit 1; fi
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
